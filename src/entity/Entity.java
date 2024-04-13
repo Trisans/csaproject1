@@ -16,4 +16,8 @@ public class Entity {
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 
+	public void damage(int amount) {
+		this.hp -= amount;
+	}
+
 }

@@ -17,6 +17,12 @@ public class Monster extends Entity {
     public int damage;
     public int spawnRate;
 
+    public int width = 16;
+    public int height = 16;
+
+    public int prevWorldX = -1;
+    public int prevWorldY = -1;
+
     public String[][] spriteDirList;
     public BufferedImage[][] spriteList;
 

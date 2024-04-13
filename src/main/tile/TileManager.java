@@ -19,13 +19,6 @@ public class TileManager {
 	String[] tileDirList = {
 		"/tiles/grass_plain.png",       // 0
 		"/tiles/brick_gray.png",        // 1
-//		"/tiles/water.png",             // 2
-//		"/tiles/sand_plain.png",        // 3
-//		"/tiles/tree_1.png",            // 4
-//		"/tiles/dirt_1.png",            // 5
-//		"/tiles/grass_flowered_1.png",  // 6
-//		"/tiles/marker.png",            // 7
-//		"/tiles/tree_1_sand.png"        // 8
 	};
 	
 	public TileManager(GamePanel gp) {
