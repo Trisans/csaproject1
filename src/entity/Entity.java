@@ -8,7 +8,9 @@ public class Entity {
 	public boolean isPlayer = false;
 
 	public int hp;
-	public int worldX_px, worldY_px;
+	public double worldX_px, worldY_px;
+	public double prevWorldX = -1;
+	public int prevWorldY = -1;
 	public int speed;
 	
 	public String direction;

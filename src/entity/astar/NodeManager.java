@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class NodeManager {
-    private GamePanel gp;
+    GamePanel gp;
 
     public ArrayList<Node> open = new ArrayList<Node>();
     public ArrayList<Node> closed = new ArrayList<Node>();
@@ -18,6 +18,7 @@ public class NodeManager {
     public NodeManager(GamePanel gp) {
         this.gp = gp;
         intMap = gp.getMap();
+        map = new Node[gp.MAX_WORLD_ROW][gp.MAX_WORLD_COL];
         convertMapToNodeMap();
     }
 

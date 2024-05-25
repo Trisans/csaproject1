@@ -36,8 +36,8 @@ public class UI {
             g2.drawImage(uiImages[0], x, 20, gp.TILE_SIZE, gp.TILE_SIZE, null);
         }
 
-//        g2.setFont(arial_40);
-//        g2.setColor(Color.white);
-//        g2.drawString("UI Text Here", gp.player.hp * 50 + 30, 50);
+        g2.setFont(arial_40);
+        g2.setColor(Color.white);
+        g2.drawString(gp.monsters[0].worldX_px + "", gp.player.hp * 50 + 30, 50);
     }
 }

@@ -5,6 +5,8 @@ import entity.astar.NodeManager;
 import entity.astar.Pathfinder;
 import entity.monster.Monster;
 import entity.monster.MonsterManager;
+import entity.monster.MonsterSpawner;
+import entity.monster.monsters.TestMonster;
 import main.tile.TileManager;
 
 import javax.swing.*;
@@ -31,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread; // when this thread is created, the run method is automatically called
     public Player player = new Player(this, keyH);
     public MonsterManager mm = new MonsterManager(this, astar);
+    public MonsterSpawner ms = new MonsterSpawner(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public UI ui = new UI(this);
 
@@ -48,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setup() {
-
+        monsters[0] = new TestMonster(10 * this.TILE_SIZE, 10 * this.TILE_SIZE);
     }
 
     public void startGameThread() {
@@ -90,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         player.update();
+        mm.updateAll();
     }
 
     public void paintComponent(Graphics g) {
@@ -99,6 +103,8 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2); // draw tiles before player because tiles are on the bottom layer
 
         player.draw(g2);
+
+        mm.drawAll(g2);
         
         ui.draw(g2);
         g2.dispose(); // clears memory

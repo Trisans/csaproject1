@@ -6,6 +6,7 @@ import main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class MonsterManager {
     /*
@@ -25,6 +26,8 @@ public class MonsterManager {
     */
     private GamePanel gp;
     private Pathfinder astar;
+
+
     Monster m;
 
     public MonsterManager(GamePanel gp, Pathfinder astar) {
@@ -32,11 +35,10 @@ public class MonsterManager {
         this.astar = astar;
     }
 
-    public String nextDir() {
-        // astar
-        // pathfinder will not make monsters hit walls, so no collision system is needed
-        return "eeeee";
+    public void attemptSpawn(ArrayList<String> species) {
+        gp.ms.attemptSpawn();
     }
+    
     public void updateAll() {
         // IF ACTIVE:
         // get next dir (astar)
@@ -48,23 +50,84 @@ public class MonsterManager {
         // save last coords divided by tilesize and then check if current coords are different
         // if same continue moving in same direction
         for (int monsterIndex = 0; monsterIndex < gp.monsters.length; monsterIndex++) {
-            if (gp.monsters[monsterIndex].active) { // monster's "active" status is true
+            if (gp.monsters[monsterIndex] != null && gp.monsters[monsterIndex].active) { // monster's "active" status is true
                 // if on a new tile, update path and direction
                 // update position based on direction and speed
                 // update sprite
                 // if hp <= 0, delete this monster
                 // if adjacent to player, deal damage and set to inactive for 2 seconds
                 m = gp.monsters[monsterIndex];
-                int worldC
-                if (m.worldX_px != m.prevWorldX || m.worldY_px != m.prevWorldY) { // on a new tile
+                int worldX = (int) (m.worldX_px / gp.TILE_SIZE);
+                int worldY = (int) (m.worldY_px / gp.TILE_SIZE);
+                if (worldX != m.prevWorldX || worldY != m.prevWorldY) { // on a new tile
+                    m.nextDir = astar.getDir(worldY, worldX, // call pathfinder
+                            (int) (gp.player.worldY_px / gp.TILE_SIZE),
+                            (int) (gp.player.worldX_px / gp.TILE_SIZE));
 
+                }
+                // direction
+                // speed
+                // move
+                // sprite
+                double tempSpeed = m.speed;
+                if (!m.nextDir.equals("no move")) {
+                    // update direction
+                    char cardinal = m.nextDir.charAt(0);
+                    switch (cardinal) {
+                        case 'n': m.direction = "up"; break;
+                        case 's': m.direction = "down"; break;
+                        case 'e': m.direction = "right"; break;
+                        case 'w': m.direction = "left"; break;
+                    }
+
+                    // update speed if necessary
+                    if (m.nextDir.length() == 2) { // if monster is moving diagonally
+                        // reduce monster speed so moving diagonally does not increase speed
+                        tempSpeed = m.speed / Math.sqrt(2);
+                    }
+
+                    // update position
+                    switch (m.nextDir) {
+                        // Cardinal
+                        case "n": m.worldY_px -= tempSpeed; break;
+                        case "s": m.worldY_px += tempSpeed; break;
+                        case "e": m.worldX_px += tempSpeed; break;
+                        case "w": m.worldX_px -= tempSpeed; break;
+                        // Diagonal
+                        case "ne":
+                            m.worldY_px -= tempSpeed;
+                            m.worldX_px += tempSpeed; break;
+                        case "se":
+                            m.worldY_px += tempSpeed;
+                            m.worldX_px += tempSpeed; break;
+                        case "sw":
+                            m.worldY_px += tempSpeed;
+                            m.worldX_px -= tempSpeed; break;
+                        case "nw":
+                            m.worldY_px -= tempSpeed;
+                            m.worldX_px -= tempSpeed; break;
+
+                        default:
+                            System.out.println("wth"); break; // wth
+                    }
+
+                    // update sprite
+                    m.spriteCounter++;
+                    if (m.spriteCounter > 3) { // change sprite every 10 frames because update is called 60 times per second
+                        m.spriteNum = (m.spriteNum % 3);
+                        m.spriteNum++;
+                        m.spriteCounter = 0;
+                    }
                 }
             }
         }
+
+        // attempt to spawn in a new monster, 60 times per second
+//        this.attemptSpawn(null);
     }
     public void drawAll(Graphics2D g2) {
         for (int monsterIndex = 0; monsterIndex < gp.monsters.length; monsterIndex++) {
-            if (gp.monsters[monsterIndex].active) { // monster's "active" status is true
+            if (gp.monsters[monsterIndex] != null && gp.monsters[monsterIndex].active) { // monster's "active" status is true
                 m = gp.monsters[monsterIndex];
                 BufferedImage image = null;
 
@@ -82,8 +145,8 @@ public class MonsterManager {
                         image = m.spriteList[3][m.spriteNum];
                         break;
                 }
-                int screenXPx = m.worldX_px - gp.player.worldX_px + gp.player.SCREEN_X_PX;
-                int screenYPx = m.worldY_px - gp.player.worldY_px + gp.player.SCREEN_Y_PX;
+                int screenXPx = (int) (m.worldX_px - gp.player.worldX_px + gp.player.SCREEN_X_PX);
+                int screenYPx = (int) (m.worldY_px - gp.player.worldY_px + gp.player.SCREEN_Y_PX);
 
                 g2.drawImage(image, screenXPx, screenYPx, m.width, m.height, null);
             }

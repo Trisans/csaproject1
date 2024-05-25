@@ -65,11 +65,11 @@ public class TileManager {
 	}
 	
 	public void draw(Graphics2D g2) {
-		int maxX = gp.player.worldX_px + gp.player.SCREEN_X_PX + gp.TILE_SIZE;
-		int minX = gp.player.worldX_px - gp.player.SCREEN_X_PX - gp.TILE_SIZE;
+		int maxX = (int) (gp.player.worldX_px + gp.player.SCREEN_X_PX + gp.TILE_SIZE);
+		int minX = (int) (gp.player.worldX_px - gp.player.SCREEN_X_PX - gp.TILE_SIZE);
 		
-		int maxY = gp.player.worldY_px + gp.player.SCREEN_Y_PX + gp.TILE_SIZE;
-		int minY = gp.player.worldY_px - gp.player.SCREEN_Y_PX - gp.TILE_SIZE;
+		int maxY = (int) (gp.player.worldY_px + gp.player.SCREEN_Y_PX + gp.TILE_SIZE);
+		int minY = (int) (gp.player.worldY_px - gp.player.SCREEN_Y_PX - gp.TILE_SIZE);
 		
 		for (int worldRow = 0; worldRow < gp.MAX_WORLD_ROW; worldRow++) {
 			
@@ -77,8 +77,8 @@ public class TileManager {
 				int tileWorldXPx = worldCol * gp.TILE_SIZE;
 				int tileWorldYPx = worldRow * gp.TILE_SIZE;
 				
-				int tileScreenXPx = tileWorldXPx - gp.player.worldX_px + gp.player.SCREEN_X_PX;
-				int tileScreenYPx = tileWorldYPx - gp.player.worldY_px + gp.player.SCREEN_Y_PX;
+				int tileScreenXPx = (int) (tileWorldXPx - gp.player.worldX_px + gp.player.SCREEN_X_PX);
+				int tileScreenYPx = (int) (tileWorldYPx - gp.player.worldY_px + gp.player.SCREEN_Y_PX);
 				
 				if (tileWorldXPx > minX && tileWorldXPx < maxX && tileWorldYPx > minY && tileWorldYPx < maxY) {
 					BufferedImage toDraw = tiles[map[worldRow][worldCol]].image;

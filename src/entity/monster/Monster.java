@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Monster extends Entity {
-    GamePanel gp;
-    Pathfinder astar;
-
     // Stats
     public int damage;
     public int spawnRate;
@@ -20,17 +17,13 @@ public class Monster extends Entity {
     public int width = 16;
     public int height = 16;
 
-    public int prevWorldX = -1;
-    public int prevWorldY = -1;
-
+    public String nextDir;
     public String[][] spriteDirList;
-    public BufferedImage[][] spriteList;
-
+    public BufferedImage[][] spriteList = new BufferedImage[4][3];
     public boolean active = true; // after it hits player, set to inactive for a pause
-    public Monster(GamePanel gp) {
-        this.gp = gp;
+
+    public Monster() {
     }
-    public Monster() {}
 
     public void getImages() {
         try {

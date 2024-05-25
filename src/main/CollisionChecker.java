@@ -9,10 +9,10 @@ public class CollisionChecker {
 	}
 	
 	public void checkTile(Entity entity) {
-		int entityLeftWorldXPx = entity.worldX_px + 9;
-		int entityRightWorldXPx = entity.worldX_px + 9 + gp.player.solidArea.width;
-		int entityTopWorldYPx = entity.worldY_px + 33;
-		int entityBottomWorldYPx = entity.worldY_px + 33 + gp.player.solidArea.height;
+		int entityLeftWorldXPx = (int) (entity.worldX_px + 9);
+		int entityRightWorldXPx = (int) (entity.worldX_px + 9 + gp.player.solidArea.width);
+		int entityTopWorldYPx = (int) (entity.worldY_px + 33);
+		int entityBottomWorldYPx = (int) (entity.worldY_px + 33 + gp.player.solidArea.height);
 		
 		int entityLeftCol = entityLeftWorldXPx / gp.TILE_SIZE;
 		int entityRightCol = entityRightWorldXPx / gp.TILE_SIZE;
