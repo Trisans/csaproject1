@@ -6,7 +6,8 @@ import main.GamePanel;
 public class TestMonster extends Monster {
 
 
-    public TestMonster(int spawnX_px, int spawnY_px) {
+    public TestMonster(int spawnX_px, int spawnY_px, GamePanel gp) {
+        super(gp);
         this.setDefaultValues(spawnX_px, spawnY_px);
     }
 

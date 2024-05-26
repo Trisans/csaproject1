@@ -12,7 +12,7 @@ public class MonsterSpawner {
 
     public void attemptSpawn() {
         // TEST CODE
-        Monster test = new TestMonster(25 * gp.TILE_SIZE, 25 * gp.TILE_SIZE);
+        Monster test = new TestMonster(25 * gp.TILE_SIZE, 25 * gp.TILE_SIZE, gp);
         for (int i = 0; i < gp.monsters.length; i++)
             if (gp.monsters[i] == null)
                 gp.monsters[i] = test;

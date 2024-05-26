@@ -9,6 +9,7 @@ public class Pathfinder {
     }
 
     public String getDir(int rowS, int colS, int rowT, int colT) {
+        nm.map[rowT][colT].isTarget = true;
         nm.closed.clear();
         nm.open.clear();
         close(nm.map[rowS][colS]);
@@ -16,12 +17,14 @@ public class Pathfinder {
         Node current = nm.map[rowS][colS];
         boolean done = false;
         int counter = 0;
+
+        done = addSurroundingToOpen(current);
         while (!done) {
-            done = addSurroundingToOpen(current);
             if (done && counter == 0 || counter > 500) return "no move";
             current = getBest(nm.map[rowS][colS], nm.map[rowT][colT]);
             close(current);
             counter++;
+            done = addSurroundingToOpen(current);
         }
         return calcDir(nm.map[rowS][colS], current);
     }
@@ -59,7 +62,7 @@ public class Pathfinder {
 
     private String calcDir(Node start, Node end) {
         // TODO: optimize while loop
-        Node target = end.parent;
+        Node target = end;
         while (true) {
             if (target.parent == start) break;
             target = target.parent;

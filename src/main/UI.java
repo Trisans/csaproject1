@@ -38,6 +38,6 @@ public class UI {
 
         g2.setFont(arial_40);
         g2.setColor(Color.white);
-        g2.drawString(gp.monsters[0].worldX_px + "", gp.player.hp * 50 + 30, 50);
+        g2.drawString(((double)Math.round(gp.monsters[0].worldX_px * 100d) / 100d) + "", gp.player.hp * 50 + 30, 50);
     }
 }

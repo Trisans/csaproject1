@@ -10,19 +10,21 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Monster extends Entity {
+    GamePanel gp;
     // Stats
     public int damage;
     public int spawnRate;
 
-    public int width = 16;
-    public int height = 16;
+    public int width = 48; // FIXME: use gp.TILE_SIZE
+    public int height = 48;
 
     public String nextDir;
     public String[][] spriteDirList;
     public BufferedImage[][] spriteList = new BufferedImage[4][3];
     public boolean active = true; // after it hits player, set to inactive for a pause
 
-    public Monster() {
+    public Monster(GamePanel gp) {
+        this.gp = gp;
     }
 
     public void getImages() {

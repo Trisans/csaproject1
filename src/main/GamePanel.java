@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setup() {
-        monsters[0] = new TestMonster(10 * this.TILE_SIZE, 10 * this.TILE_SIZE);
+        monsters[0] = new TestMonster(2 * this.TILE_SIZE, 2 * this.TILE_SIZE, this);
     }
 
     public void startGameThread() {
@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
                 double remainingTime = (nextDrawTime - System.nanoTime()) / 1000000; // = 0.016 seconds - time update()
                 // and repaint() take, in milliseconds
                 
-                if (remainingTime < 0) {
+                if (remainingTime < 0) { // lag
                     remainingTime = 0;
                 }
                 

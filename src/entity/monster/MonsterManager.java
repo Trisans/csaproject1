@@ -60,11 +60,15 @@ public class MonsterManager {
                 int worldX = (int) (m.worldX_px / gp.TILE_SIZE);
                 int worldY = (int) (m.worldY_px / gp.TILE_SIZE);
                 if (worldX != m.prevWorldX || worldY != m.prevWorldY) { // on a new tile
-                    m.nextDir = astar.getDir(worldY, worldX, // call pathfinder
-                            (int) (gp.player.worldY_px / gp.TILE_SIZE),
-                            (int) (gp.player.worldX_px / gp.TILE_SIZE));
+//                    m.nextDir = astar.getDir(worldY, worldX, // call pathfinder
+//                            (int) (gp.player.worldY_px / gp.TILE_SIZE),
+//                            (int) (gp.player.worldX_px / gp.TILE_SIZE));
+                    m.nextDir = "se";
 
                 }
+                // update previous position
+                m.prevWorldX = worldX;
+                m.prevWorldY = worldY;
                 // direction
                 // speed
                 // move
@@ -114,8 +118,8 @@ public class MonsterManager {
                     // update sprite
                     m.spriteCounter++;
                     if (m.spriteCounter > 3) { // change sprite every 10 frames because update is called 60 times per second
-                        m.spriteNum = (m.spriteNum % 3);
                         m.spriteNum++;
+                        m.spriteNum = (m.spriteNum % 2);
                         m.spriteCounter = 0;
                     }
                 }
@@ -132,10 +136,10 @@ public class MonsterManager {
                 BufferedImage image = null;
 
                 switch (m.direction) {
-                    case "up":
+                    case "down":
                         image = m.spriteList[0][m.spriteNum];
                         break;
-                    case "down":
+                    case "up":
                         image = m.spriteList[1][m.spriteNum];
                         break;
                     case "left":

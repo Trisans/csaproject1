@@ -70,6 +70,7 @@ public class Player extends Entity {
 	}
 	
 	public void update() {
+		// TODO: update player's worldX/Y and prevWorldX/Y
 		double tempSpeed = speed;
 		if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 			// if any movement keys are being pressed
