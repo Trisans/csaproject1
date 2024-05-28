@@ -22,7 +22,7 @@ public class Node {
     }
 
     public double getFCost(Node start, Node target) {
-        if (f != -1) return f; // memoization to reduce number of sqrt calculations
+//        if (f != -1) return f; // memoization to reduce number of sqrt calculations HA GOT YOU YOU STUPID BUG YOU HAVE NO IDEA HOW LONG IT TOOK ME TO FIGURE OUT WHY THIS WAS BREAKING
         g = Math.sqrt(Math.pow(target.row - row, 2) + Math.pow(target.col - col, 2)); // node to target
         h = Math.sqrt(Math.pow(start.row - row, 2) + Math.pow(start.col - col, 2)); // start to node
         f = g + h;

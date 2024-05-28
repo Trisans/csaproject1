@@ -9,6 +9,12 @@ public class Pathfinder {
     }
 
     public String getDir(int rowS, int colS, int rowT, int colT) {
+        for (int row = 0; row < nm.map.length; row++) {
+            for (int col = 0; col < nm.map[0].length; col++) {
+                nm.map[row][col].isTarget = false;
+            }
+        }
+
         nm.map[rowT][colT].isTarget = true;
         nm.closed.clear();
         nm.open.clear();
@@ -60,9 +66,10 @@ public class Pathfinder {
         return false;
     }
 
-    private String calcDir(Node start, Node end) {
+    private String calcDir(Node start, Node end) { // determines the optimal direction based on the start node and the calculated target node
         // TODO: optimize while loop
         Node target = end;
+        if (target == start) return "no move";
         while (true) {
             if (target.parent == start) break;
             target = target.parent;
