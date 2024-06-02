@@ -1,11 +1,15 @@
 package entity.astar;
 
+import main.GamePanel;
+
 import java.util.ArrayList;
 
 public class Pathfinder {
     NodeManager nm;
-    public Pathfinder(NodeManager nm) {
+    GamePanel gp;
+    public Pathfinder(NodeManager nm, GamePanel gp) {
         this.nm = nm;
+        this.gp = gp;
     }
 
     public String getDir(int rowS, int colS, int rowT, int colT) {
@@ -70,6 +74,7 @@ public class Pathfinder {
         // TODO: optimize while loop
         Node target = end;
         if (target == start) return "no move";
+
         while (true) {
             if (target.parent == start) break;
             target = target.parent;

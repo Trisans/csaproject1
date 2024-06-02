@@ -59,13 +59,13 @@ public class MonsterManager {
                 m = gp.monsters[monsterIndex];
                 int worldX = (int) (m.worldX_px / gp.TILE_SIZE);
                 int worldY = (int) (m.worldY_px / gp.TILE_SIZE);
-                if (worldX != m.prevWorldX || worldY != m.prevWorldY) { // on a new tile
+                if ((worldX != m.prevWorldX || worldY != m.prevWorldY) || (gp.player.prevWorldX != (int) (gp.player.worldX_px / gp.TILE_SIZE) || gp.player.prevWorldY != (int) (gp.player.worldY_px / gp.TILE_SIZE))) { // on a new tile
                     m.nextDir = astar.getDir(worldY, worldX, // call pathfinder
                             (int) (gp.player.worldY_px / gp.TILE_SIZE),
                             (int) (gp.player.worldX_px / gp.TILE_SIZE));
 //                    m.nextDir = "se";
-                    gp.player.worldX_px = 0;
-                    gp.player.worldY_px = 0;
+//                    gp.player.worldX_px = 2 * gp.TILE_SIZE;
+//                    gp.player.worldY_px = 2 * gp.TILE_SIZE;
                 }
                 // update previous position
                 m.prevWorldX = worldX;
@@ -118,7 +118,7 @@ public class MonsterManager {
 
                     // update sprite
                     m.spriteCounter++;
-                    if (m.spriteCounter > 3) { // change sprite every 10 frames because update is called 60 times per second
+                    if (m.spriteCounter > (12 / m.speed)) { // change sprite every 10 frames because update is called 60 times per second
                         m.spriteNum++;
                         m.spriteNum = (m.spriteNum % 2);
                         m.spriteCounter = 0;

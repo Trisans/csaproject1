@@ -26,10 +26,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int MAX_WORLD_ROW = 50;
     public final int MAX_WORLD_COL = 50;
 
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     NodeManager nm = new NodeManager(this);
-    Pathfinder astar = new Pathfinder(nm);
+    Pathfinder astar = new Pathfinder(nm, this);
     Thread gameThread; // when this thread is created, the run method is automatically called
     public Player player = new Player(this, keyH);
     public MonsterManager mm = new MonsterManager(this, astar);
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setup() {
-        monsters[0] = new TestMonster(2 * this.TILE_SIZE, 2 * this.TILE_SIZE, this);
+        monsters[0] = new TestMonster(10 * this.TILE_SIZE, 10 * this.TILE_SIZE, this);
     }
 
     public void startGameThread() {

@@ -26,6 +26,13 @@ public class Player extends Entity {
 			{"/player/little_guy_right_1.png", "/player/little_guy_right_2.png", "/player/little_guy_right_3.png"}
 	};
 
+//	public String[][] spriteDirList = {
+//			{"/player/debug_1.png", "/player/debug_1.png", "/player/debug_2.png"},
+//			{"/player/debug_1.png", "/player/debug_1.png", "/player/debug_2.png"},
+//			{"/player/debug_1.png", "/player/debug_1.png", "/player/debug_2.png"},
+//			{"/player/debug_1.png", "/player/debug_1.png", "/player/debug_2.png"}
+//	};
+
 	public Rectangle solidArea;
 
 	public boolean collisionOn = false;
@@ -44,8 +51,8 @@ public class Player extends Entity {
 		getPlayerImage();
 	}
 	public void setDefaultValues() {
-		worldX_px = gp.TILE_SIZE * 10;
-		worldY_px = gp.TILE_SIZE * 10;
+		worldX_px = gp.TILE_SIZE * 20;
+		worldY_px = gp.TILE_SIZE * 6;
 		SCREEN_X_PX = gp.MAX_SCREEN_COL * (gp.TILE_SIZE / 2) - (gp.TILE_SIZE / 2);
 		SCREEN_Y_PX = gp.MAX_SCREEN_ROW * (gp.TILE_SIZE / 2) - (gp.TILE_SIZE / 2);
 		speed = 4;
@@ -72,6 +79,9 @@ public class Player extends Entity {
 	public void update() {
 		// TODO: update player's worldX/Y and prevWorldX/Y
 		double tempSpeed = speed;
+
+		prevWorldX = worldX_px / gp.TILE_SIZE;
+		prevWorldY = worldY_px / gp.TILE_SIZE;
 		if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 			// if any movement keys are being pressed
 			isMoving = true;
@@ -101,6 +111,7 @@ public class Player extends Entity {
 			gp.cChecker.checkTile(this);
 			
 			// move player
+
 			if (keyH.upPressed && !collisionUp) {
 				worldY_px -= tempSpeed;
 			} else if (keyH.downPressed && !collisionDown) {
@@ -114,7 +125,7 @@ public class Player extends Entity {
 			if (isMoving) {
 				// update sprite
 				spriteCounter++;
-				if (spriteCounter > 3) { // change sprite every 10 frames because update is called 60 times per second
+				if (spriteCounter > 12 / speed) { // change sprite every 10 frames because update is called 60 times per second
 					spriteNum = (spriteNum % 3);
 					spriteNum++;
 					spriteCounter = 0;

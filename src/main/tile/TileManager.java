@@ -17,8 +17,9 @@ public class TileManager {
 	public int map[][];
 	
 	String[] tileDirList = {
-		"/tiles/grass_plain.png",       // 0
-		"/tiles/brick_gray.png",        // 1
+		"/tiles/debug_floor.png",       // 0
+		"/tiles/debug_wall.png",        // 1
+		"/tiles/path.png"
 	};
 	
 	public TileManager(GamePanel gp) {

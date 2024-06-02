@@ -21,7 +21,10 @@ public class TestMonster extends Monster {
         this.direction = "down";
 
         spriteDirList = new String[][] {
-                {"/monster/monster_down_1.png", "/monster/monster_down_2.png"}
+                {"/monster/testmonster_1.png", "/monster/testmonster_2.png"},
+                {"/monster/testmonster_1.png", "/monster/testmonster_2.png"},
+                {"/monster/testmonster_1.png", "/monster/testmonster_2.png"},
+                {"/monster/testmonster_1.png", "/monster/testmonster_2.png"},
         };
         this.getImages();
     }

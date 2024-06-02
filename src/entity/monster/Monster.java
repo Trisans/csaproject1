@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Monster extends Entity {
+public abstract class Monster extends Entity {
     GamePanel gp;
     // Stats
     public int damage;
