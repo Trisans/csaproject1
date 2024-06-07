@@ -57,8 +57,16 @@ public class MonsterManager {
                 // if hp <= 0, delete this monster
                 // if adjacent to player, deal damage and set to inactive for 2 seconds
                 m = gp.monsters[monsterIndex];
-                int worldX = (int) (m.worldX_px / gp.TILE_SIZE);
-                int worldY = (int) (m.worldY_px / gp.TILE_SIZE);
+                int xModifier = 0;
+                int yModifier = 0;
+                switch (m.direction) {
+                    case "up", "left":
+                        xModifier = gp.TILE_SIZE;
+                        yModifier = gp.TILE_SIZE;
+                        break;
+                }
+                int worldX = (int) ((m.worldX_px + xModifier) / gp.TILE_SIZE);
+                int worldY = (int) ((m.worldY_px + yModifier) / gp.TILE_SIZE);
                 if ((worldX != m.prevWorldX || worldY != m.prevWorldY) || (gp.player.prevWorldX != (int) (gp.player.worldX_px / gp.TILE_SIZE) || gp.player.prevWorldY != (int) (gp.player.worldY_px / gp.TILE_SIZE))) { // on a new tile
                     m.nextDir = astar.getDir(worldY, worldX, // call pathfinder
                             (int) (gp.player.worldY_px / gp.TILE_SIZE),

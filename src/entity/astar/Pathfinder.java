@@ -27,8 +27,8 @@ public class Pathfinder {
         Node current = nm.map[rowS][colS];
         boolean done = false;
         int counter = 0;
-
         done = addSurroundingToOpen(current);
+
         while (!done) {
             if (done && counter == 0 || counter > 500) return "no move";
             current = getBest(nm.map[rowS][colS], nm.map[rowT][colT]);
